@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Main Layout</title>
+	<link rel="stylesheet/less" href="angular-resizable.css">
+	<link rel="stylesheet/less" href="main.less">
+</head>
+<body ng-app="demo-app">
+	<header>
+		<div class="logo">
+			LOGO
+		</div>
+		<div class="title">
+			Page Title	
+		</div>
+		<div class="user-tools">
+			Welcome Javier
+		</div>
+	</header>
+	<main>
+		<nav class="left-side" ng-class="expanded" ng-mouseenter="expanded='expanded'" ng-mouseleave="expanded=''">
+			<ul>
+				<li>Option 1</li>
+				<li>Option 2</li>
+				<li>Option 3</li>
+			</ul>
+		</nav>
+		<section class="center-panel" ng-controller="CenterPanelCtrl">
+			<section class="viz">				
+				<iframe src="frame-viz.html" frameborder="0"></iframe>
+			</section>
+			<aside 
+			resizable r-directions="['top']" r-flex="true" 
+			class="lower-tray" min-max-buttons>
+				<header>
+					<div class="title">
+						LOWER TRAY
+					</div>
+					<div class="lower-tray-controls">
+						<button ng-click="hide()">hide</button>
+						<button ng-click="minimize()">min</button>
+						<button ng-click="maximize()">max</button>
+					</div>
+				</header>
+				LOWER TRAY CONTENT
+			</aside>
+		</section>
+		<section class="right-side">RF</section>
+	</main>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.1/less.min.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src='angular-resizable.js'></script>
+	<script>
+		var app = angular.module('demo-app', ['angularResizable']);
+
+		app.directive('minMaxButtons', function()
+		{
+			return {
+				link: function(scope, elem)
+				{
+					scope.hide = function()
+					{
+						elem.css('flexBasis', '0px');
+						elem.css('height', '0px');
+					};
+
+					scope.minimize = function()
+					{
+						var parentHeight = elem.parent()[0].offsetHeight;
+						elem.css('flexBasis', (parentHeight * 0.2) + 'px');
+					};
+
+					scope.maximize = function()
+					{
+						var parentHeight = elem.parent()[0].offsetHeight;
+						elem.css('flexBasis', (parentHeight * 0.8) + 'px');
+					};
+				}
+			}
+		})
+
+		app.controller('CenterPanelCtrl', function($scope)
+		{
+		});
+	</script>
+</body>
+</html>

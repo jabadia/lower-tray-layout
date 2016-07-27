@@ -1,0 +1,147 @@
+body, html {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+
+	box-sizing: border-box;
+
+	background: #ddd;
+
+	display: flex;
+	flex-flow: column nowrap;
+	overflow: hidden;
+}
+
+body > header {
+
+	// as a child
+	flex: 0 0 auto;
+	height: 40px;	
+
+	// as a container
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+
+	// border-bottom: black solid 1px;
+
+	background: #eee;
+
+	// div { border: 1px solid red; }
+
+	.logo {
+		flex: 1 1 auto;
+		text-align: left;
+		width: 10%;
+	}
+
+	.title {
+		flex: 6 1 auto;
+		text-align: center;
+		height: 1em;
+		width: 10%;
+	}
+
+	.user-tools {
+		flex: 1 1 auto;
+		text-align: right;
+		width: 10%;
+	}
+}
+
+body > main {	
+
+	// as a child
+	flex: 2 1 auto;
+	// height: 90%;
+
+	// as a container
+	display: flex;
+	flex-direction: row;
+
+	background: #fdd;
+
+	// &> * { border: 1px solid green; }
+
+	.left-side {
+		flex: 0 1 auto;
+		width: 50px;
+		overflow: visible;
+
+		ul {
+			position: absolute;
+			margin: 0;
+			padding: 0;
+			width: 50px;
+			height: 100%;
+			overflow: hidden;
+			z-index: 100;
+
+			background: rgba(255,100,100,0.9);
+			// transition: width linear 0.1s;
+
+			li {
+				width: 220px;
+			}
+		}
+		&.expanded ul {
+			width: 220px;
+		}
+
+	}
+	.center-panel {
+		// as a child
+		flex: 3 1 auto;
+
+		// as a container
+		display: flex;
+		flex-direction: column;
+
+		.viz {
+			flex: 1;
+			background: #ddd;
+			min-height: 100px;
+			position: relative;
+			margin-bottom: 10px;
+
+			iframe {
+				position: absolute;
+				// top: 0;
+				// bottom: 0;
+				// left: 0;
+				// right: 0;
+				width: 100%;
+				height: 100%;
+			}
+		}
+		.lower-tray {
+			flex: 0 0 300px;
+			background: #ddf;
+		}
+	}
+	.right-side {
+		flex: 0 1 auto;
+		width: 170px;
+	}
+}
+
+.lower-tray {
+
+	transition: height,flex-basis ease-out 0.4s;
+
+	header {
+		display: flex;
+		flex-flow: row nowrap;
+		background: white;
+
+		.title {
+			flex: 2;
+			text-align: center;
+		}
+		.lower-tray-controls {
+			flex: 0 0 content;
+			text-align: right;
+		}
+	}
+}
